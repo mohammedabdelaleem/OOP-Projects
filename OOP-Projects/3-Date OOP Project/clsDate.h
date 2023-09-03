@@ -12,7 +12,6 @@
 #define ll long long
 using namespace std;
 
-
 class clsDate
 {
 private:
@@ -83,9 +82,9 @@ public:
     clsDate(short DateOrderInYear, short Year)
     {
         clsDate Date = clsDate::DateFromDayOrderInYear(DateOrderInYear, Year);
-        _Day = Date.Day;
-        _Month = Date.Month;
-        _Year = Date.Year; 
+        _Day = Date._Day;
+        _Month = Date._Month;
+        _Year = Date._Year; 
     }
 
     void SetDay(short Day)
@@ -535,26 +534,42 @@ public:
 
     ////////////////////////////
 
-    static bool Date1EqualToDate2(clsDate Date1, clsDate Date2)
+    static bool IsDate1EqualToDate2(clsDate Date1, clsDate Date2)
     {
         return  ((Date1._Year == Date2._Year) && (Date1._Month == Date2._Month) && (Date1._Day == Date2._Day));
     }
 
     bool operator==(clsDate Date2)
     {
-        return Date1EqualToDate2(*this, Date2);
+        return IsDate1EqualToDate2(*this, Date2);
     }
 
 
     static bool IsDate1AfterDate2(clsDate Date1, clsDate Date2)
     {
-        return  (!IsDate1BeforeDate2(Date1, Date2) && !Date1EqualToDate2(Date1, Date2));
+        return  (!IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualToDate2(Date1, Date2));
     }
 
     bool operator>(clsDate Date2)
     {
         return IsDate1AfterDate2(*this, Date2);
     }
+
+    //In InputValidate Project I Need IsDateBetween() 
+    
+    static bool IsDateBetween(clsDate Date1, clsDate StartDate, clsDate EndDate)
+    {
+        return
+            (((IsDate1AfterDate2(Date1, StartDate) || Date1 == StartDate) && (IsDate1BeforeDate2(Date1, EndDate) || Date1 == EndDate))
+            ||
+            ((IsDate1AfterDate2(Date1, EndDate) || Date1 == EndDate) && (IsDate1BeforeDate2(Date1, StartDate) || Date1 == StartDate)));//if He Swapped
+    }
+
+    bool IsMeBetween(clsDate StartDate, clsDate EndDate)
+    {
+        return IsDateBetween(*this, StartDate, EndDate);
+    }
+
     //////////////////////////
 
     static clsDate ReadFullDate()
@@ -656,7 +671,7 @@ public:
     ////////////////////////////////////////////////////////////////////////////////////////
 
     //Swap 2 Sturcture Objects
-    static void SwapDates(clsDate Date1, clsDate Date2)
+    static void SwapDates(clsDate& Date1, clsDate& Date2)
     {
         clsDate Temp;
         Temp._Day = Date1._Day;
@@ -1211,7 +1226,7 @@ public:
       if (IsDate1AfterDate2(Date1, Date2))
           return enDateCompare::After;
 
-      else if (Date1EqualToDate2(Date1, Date2))
+      else if (IsDate1EqualToDate2(Date1, Date2))
           return  enDateCompare::Equal;
 
       return enDateCompare::Before;
@@ -1225,7 +1240,7 @@ public:
   //////////////////////////////
   
 
-  static bool ValidateDay(clsDate& Date)
+  static bool ValidateDay(const clsDate& Date)
   {
       return !(Date._Day<1 || Date._Day>NumberOfDaysInAMonth(Date._Month, Date._Year));
   }
@@ -1240,7 +1255,7 @@ public:
       return (Year > 0);
   }
 
- static bool ValidateDate(clsDate& Date)
+ static bool ValidateDate(const clsDate& Date)
   {
       return(ValidateDay(Date) && ValidateMonth(Date._Month) && ValidateYear(Date._Year));
   }

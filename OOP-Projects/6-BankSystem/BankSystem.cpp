@@ -144,6 +144,7 @@ void DeleteCLient()
             cout << "\nClient Deleted Successfully.\n";
             Client.Print();
         }
+
         else
         {
             cout << "\nError Client Wasn't Deleted.\n\a";
@@ -151,9 +152,55 @@ void DeleteCLient()
     }
 
 }
+
+void  PrintShowClientsHeader(short ClientsNumber)
+{
+     cout << clsUtil::Tabs(4) << "Clients List (" << ClientsNumber << ") Client(s).\n";
+
+    cout << clsUtil::Get_N_Chars('=', 96+4) << endl;
+    cout << "|" << left << setw(15) << "Account Number";
+    cout << "|" << left << setw(25) << "Client Name";
+    cout << "|" << left << setw(12) << "Phone";
+    cout << "|" << left << setw(20) << "Email";
+    cout << "|" << left << setw(10) << "Pin Code";
+    cout << "|" << left << setw(11) << "Balance" << "|"<<endl;
+    cout << clsUtil::Get_N_Chars('=', 96+4) << endl;
+}
+
+void PrintClientRecordLine(clsBankClient& Client)
+{
+    cout << "|" << left << setw(15) << Client.AccountNumber();
+    cout << "|" << left << setw(25) << Client.FullName();
+    cout << "|" << left << setw(12) << Client.Phone;
+    cout << "|" << left << setw(20) << Client.Email;
+    cout << "|" << left << setw(10) << Client.PinCode;
+    cout << "|" << left << setw(11) << Client.AccountBalance << "|" << endl;
+    cout << clsUtil::Get_N_Chars('-', 96 + 4) << endl;
+}
+
+void ShowClientsList()
+{
+    vector<clsBankClient>vClients = clsBankClient::GetClientsList();
+
+    PrintShowClientsHeader(vClients.size());
+
+    if (vClients.size())
+    {
+        for(clsBankClient& Client : vClients)
+        {
+            PrintClientRecordLine(Client);
+        }
+    }
+    else {
+        cout << "\nNo Clients Available In The System\a\n";
+    }
+
+  
+
+}
 int main()
 {
-    DeleteCLient();
+    ShowClientsList();
 
     system("pause>0");
     return 0;

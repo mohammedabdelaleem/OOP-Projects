@@ -314,5 +314,12 @@ public:
 
 		return true;
 	}
+
+	static vector<clsBankClient>GetClientsList()
+	{
+		return _LoadClientsDateFromFile(FileName);
+	}
+
 };
+
 

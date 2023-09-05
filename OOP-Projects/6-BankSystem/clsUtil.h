@@ -1424,6 +1424,15 @@ static void ReversedMatrix(short Matrix1[Row][Col], short ReversedMatrix[Row][Co
 
 }
 
+static string Get_N_Chars(char ch = '-', short N = 50)
+{
+    string Str = "";
+    for (short i = 0; i < N; i++)
+        Str += ch;
+    return Str;
+}
+
+
 private:
     static bool CompareRight(short A, short B)
     {

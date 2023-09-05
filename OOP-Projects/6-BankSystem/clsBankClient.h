@@ -12,7 +12,7 @@ class clsBankClient : public clsPerson
 {
 private:
 
-	enum enMode { EmptyMode = 0, UpdateMode = 1 };
+	enum enMode { EmptyMode = 0, UpdateMode = 1 ,AddNewMode=2};
 	enMode _Mode;
 
 	string _AccountNumber;
@@ -105,6 +105,22 @@ private:
 		_SaveCleintsDataToFile(FileName, _vClients);
 	}
 
+	void _AddNew()
+	{
+		_AddDatelineToFile(FileName, _ConvertClientObjectToLine(*this));
+	}
+
+	void _AddDatelineToFile(string FileName, string sClient)
+	{
+		fstream MyFile;
+		MyFile.open(FileName, ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+			MyFile << sClient << endl;
+			MyFile.close();
+		}
+	}
 
 public:
 	clsBankClient(enMode Mode=enMode::EmptyMode, string FirstName="", string LastName = "", string Email = "",
@@ -231,27 +247,49 @@ public:
 	}
 
 	//Try To Separate Ui From A Class***************
-	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1 };
+	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1, svFaildAccountNumberExists=3};
 
 	enSaveResults Save()
 	{
 		switch (_Mode)
 		{
-		case clsBankClient::EmptyMode:
+			
+		case enMode::EmptyMode:
 		{
-			return enSaveResults::svFaildEmptyObject;
+			if (IsEmpty())
+			{
+				return enSaveResults::svFaildEmptyObject;
+			}
 		}
 
-		case clsBankClient::UpdateMode:
+		case enMode::UpdateMode:
 		{
 			_Update();
 			return enSaveResults::svSucceeded;
 		}
 
+		case enMode::AddNewMode:
+			//This Will Added To DB | File
+			if (IsClientExist(_AccountNumber))
+			{
+				return enSaveResults::svFaildAccountNumberExists;
+			}
+			else
+			{
+				_AddNew();
+
+				//We Need To Update Mode After Addition
+			_Mode = enMode::UpdateMode;
+			return enSaveResults::svSucceeded;
+			}
+
 		}
 	}
 
-
+	static clsBankClient GetNewClientObject(string AccountNumber)
+	{
+		return clsBankClient(enMode::AddNewMode, "", "", "","",AccountNumber, "", 0);
+	}
 
 };
 

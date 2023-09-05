@@ -50,14 +50,7 @@ private:
 	}
 
 
-	string ReadString(string Message)
-	{
-		string Str = "";
-		cout << Message;
-		getline(cin, Str);
 
-		return Str;
-	}
 
 	char ReadCharacter(string Message)
 	{
@@ -205,6 +198,16 @@ public:
 
 	__declspec(property(get = GetValue, put = SetValue)) string Value;
 	/// /////////////////////
+
+
+	static	string ReadString(string Message)
+	{
+		string Str;
+		cout << Message;
+		getline(cin >> ws, Str);
+
+		return Str;
+	}
 
 	static void PrintFirstLettersInString(string Str)
 	{

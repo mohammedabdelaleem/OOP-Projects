@@ -12,12 +12,13 @@ class clsBankClient : public clsPerson
 {
 private:
 
-	enum enMode{ EmptyMode=0 , UpdateMode=1 };
+	enum enMode { EmptyMode = 0, UpdateMode = 1 };
 	enMode _Mode;
 
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
+
 
 	static clsBankClient _ConvertLineToClientObject(string sLine)
 	{
@@ -28,20 +29,33 @@ private:
 
 	}
 
-	static vector<clsBankClient> _LoadBankClientsFromFile(string FileName)
+	static string _ConvertClientObjectToLine(clsBankClient& Client, string Separator = "#//#")
+	{
+		string sClient = "";
+		sClient += Client.FirstName + Separator;
+		sClient += Client.LastName + Separator;
+		sClient += Client.Email + Separator;
+		sClient += Client.Phone + Separator;
+		sClient += Client.AccountNumber() + Separator;
+		sClient += Client.PinCode + Separator;
+		sClient += to_string(Client.AccountBalance);
+
+		return sClient;
+	}
+
+	static vector<clsBankClient> _LoadClientsDateFromFile(string FileName)
 	{
 		fstream MyFile;
 		MyFile.open(FileName, ios::in);
 
 		vector<clsBankClient>vClients;
 
-		if(MyFile.is_open())
+		if (MyFile.is_open())
 		{
-			clsBankClient BankClient;
 			string sLine;
 			while (getline(MyFile, sLine))
 			{
-				BankClient = _ConvertLineToClientObject(sLine);
+				clsBankClient BankClient = _ConvertLineToClientObject(sLine);
 				vClients.push_back(BankClient);
 			}
 		}
@@ -50,9 +64,45 @@ private:
 		return vClients;
 	}
 
+	static void _SaveCleintsDataToFile(string FileName, vector<clsBankClient>& vClients)
+	{
+		fstream MyFile;
+		MyFile.open(FileName, ios::out);//overwrite
+
+		string DataLine;
+
+		if (MyFile.is_open())
+		{
+			for (clsBankClient& C : vClients)
+			{
+
+				DataLine = _ConvertClientObjectToLine(C);
+				MyFile << DataLine << endl;
+			}
+			MyFile.close();
+		}
+		
+	}
+
 	static clsBankClient _GetEmptyClientObject()
 	{
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
+	}
+
+	void _Update()
+	{
+		vector<clsBankClient>_vClients = _LoadClientsDateFromFile(FileName);
+
+		for (clsBankClient& C : _vClients)
+		{
+			if (C.AccountNumber() == AccountNumber()) //Super
+			{
+				C = *this;
+				break;
+			}
+		}
+
+		_SaveCleintsDataToFile(FileName, _vClients);
 	}
 
 
@@ -72,7 +122,7 @@ public:
 	}
 
 	//Read Only Property
-	string GetAccountNumber()
+	string AccountNumber()
 	{
 		return _AccountNumber;
 	}
@@ -110,7 +160,7 @@ public:
 	void Print()
 	{
 		//clsPerson::Print(); //Copy Paste Just For Formating.
-		cout << "\nInfo:";
+		cout << "\nClient Card Info:";
 		cout << "\n___________________________\n";
 		cout << "\nFirstName     : " << FirstName;
 		cout << "\nLastName      : " << LastName;
@@ -179,5 +229,29 @@ public:
 		clsBankClient BankClient = Find(AccountNumber);
 		return (!BankClient.IsEmpty());
 	}
+
+	//Try To Separate Ui From A Class***************
+	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1 };
+
+	enSaveResults Save()
+	{
+		switch (_Mode)
+		{
+		case clsBankClient::EmptyMode:
+		{
+			return enSaveResults::svFaildEmptyObject;
+		}
+
+		case clsBankClient::UpdateMode:
+		{
+			_Update();
+			return enSaveResults::svSucceeded;
+		}
+
+		}
+	}
+
+
+
 };
 

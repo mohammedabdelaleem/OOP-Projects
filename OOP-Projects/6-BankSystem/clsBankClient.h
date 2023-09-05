@@ -18,7 +18,7 @@ private:
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
-
+	bool _MarkedForDelete=false;
 
 	static clsBankClient _ConvertLineToClientObject(string sLine)
 	{
@@ -75,9 +75,11 @@ private:
 		{
 			for (clsBankClient& C : vClients)
 			{
-
-				DataLine = _ConvertClientObjectToLine(C);
-				MyFile << DataLine << endl;
+				if(!C._MarkedForDelete)
+				{
+					DataLine = _ConvertClientObjectToLine(C);
+					MyFile << DataLine << endl;
+				}
 			}
 			MyFile.close();
 		}
@@ -247,7 +249,7 @@ public:
 	}
 
 	//Try To Separate Ui From A Class***************
-	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1, svFaildAccountNumberExists=3};
+	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1, svFaildAccountNumberExists=2};
 
 	enSaveResults Save()
 	{
@@ -276,6 +278,7 @@ public:
 			}
 			else
 			{
+				//Adding Current Object To File
 				_AddNew();
 
 				//We Need To Update Mode After Addition
@@ -291,5 +294,25 @@ public:
 		return clsBankClient(enMode::AddNewMode, "", "", "","",AccountNumber, "", 0);
 	}
 
+
+	bool Delete()
+	{
+		vector<clsBankClient>vClients = _LoadClientsDateFromFile(FileName);
+		for (clsBankClient& C : vClients)
+		{
+			if (C.AccountNumber() == _AccountNumber)
+			{
+				C._MarkedForDelete = true;
+				break;
+			}
+		}
+
+		_SaveCleintsDataToFile(FileName, vClients);
+		
+		//this is Super 
+		*this = _GetEmptyClientObject();
+
+		return true;
+	}
 };
 

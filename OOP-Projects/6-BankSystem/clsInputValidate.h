@@ -19,6 +19,48 @@ public:
 		return clsDate::IsDateBetween(Date, StartDate, EndDate);
 	}
 
+	static short ReadShortNumber(string Message,string ErrorMessage = "Invalid Number, Enter again: ")
+	{
+		short Number;
+		cout << Message;
+		cin >> Number;
+
+		while (cin.fail()) {
+			// user didn't input a number   
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cout << ErrorMessage ;
+			cin >> Number;
+		}
+
+		return Number;
+	}
+	
+
+	static short ReadShortNumberBetween(int From, int To)
+	{
+		
+			short Number = 1;
+			bool validInput = true;
+			do
+			{
+				if (!validInput) {
+					// If input was invalid, clear the error flag and ignore any remaining input in the stream
+					cin.clear();
+					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					cout << "Invalid input. Please enter a number between " << From << " and " << To << "." << endl;
+				}
+				cout << "Enter A Number [" << From << "-" << To << "] ? ";
+				cin >> Number;
+				validInput = cin.good() && Number >= From && Number <= To;
+			} while (!validInput);
+
+			return Number;
+	
+
+	}
+
+
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		int Number;

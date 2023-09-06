@@ -1,5 +1,6 @@
 #pragma once
 
+#include"clsClientListScreen.h"
 #include"clsInputValidate.h"
 #include"clsScreen.h"
 #include <iomanip>
@@ -21,37 +22,38 @@ private:
 	}
 
 	//The Skeleton ///////////////////////////////////////////////////////////////////////////////
-	static void ShowAllClientsScreen()
+	static void _ShowAllClientsScreen()
 	{
-		cout << "\nThis Is Show All Clients Screen.\n\n";
+		//cout << "\nThis Is Show All Clients Screen.\n\n";
+		clsClientListScreen::ShowClientsList();
 	}
 
-	static void ShowAddNewClientsScreen()
+	static void _ShowAddNewClientsScreen()
 	{
 		cout << "\nThis Is Show Add New Clients Screen.\n\n";
 	}
 
-	static void	ShowDeleteClientScreen()
+	static void	_ShowDeleteClientScreen()
 	{
 		cout << "\nThis Is ShowDeleteClientScreen.\n\n";
 	}
 
-	static void	ShowUpdateClientScreen()
+	static void	_ShowUpdateClientScreen()
 	{
 		cout << "\nThis Is ShowUpdateClientScreen.\n\n";
 	}
 
-	static void	ShowFindClientScreen()
+	static void	_ShowFindClientScreen()
 	{
 		cout << "\nThis Is ShowFindClientScreen.\n\n";
 	}
 
-	static void	ShowTransactionMenu()
+	static void	_ShowTransactionMenu()
 	{
 		cout << "\nThis Is ShowTransactionMenu.\n\n";
 	}
 
-	static void	ShowManageUsersMenu()
+	static void	_ShowManageUsersMenu()
 	{
 		cout << "\nThis Is ShowManageUsersMenu.\n\n";
 	}
@@ -66,9 +68,9 @@ private:
 	static void _ShowEndScreen()
 	{
 		system("cls");
-		cout << "\n-------------------------------------";
+		cout << "\n------------------------------------------";
 		cout << "\n\t\tEnd Of Program ";
-		cout << "\n-------------------------------------";
+		cout << "\n------------------------------------------";
 	}
 
 	//Performe Main Menu Option
@@ -79,49 +81,49 @@ private:
 		case enMainMenuOption::eListClients:
 			system("cls");
 			//load(5); //Windows Library Will Make A Problem 
-			ShowAllClientsScreen();
+			_ShowAllClientsScreen();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eAddNewClient:
 			system("cls");
 			//load(5);
-			ShowAddNewClientsScreen();
+			_ShowAddNewClientsScreen();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eDeleteClent:
 			system("cls");
 			//load(5);
-			ShowDeleteClientScreen();
+			_ShowDeleteClientScreen();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eUpdateClient:
 			system("cls");
 			//load(5);
-			ShowUpdateClientScreen();
+			_ShowUpdateClientScreen();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eFindClient:
 			system("cls");
 			//load(5);
-			ShowFindClientScreen();
+			_ShowFindClientScreen();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eTransactions:
 			system("cls");
 			//load(5);
-			ShowTransactionMenu();
+			_ShowTransactionMenu();
 			GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eMangeUsers:
 			system("cls");
 			//load(5);
-			ShowManageUsersMenu();
+			_ShowManageUsersMenu();
 			break;
 
 		case enMainMenuOption::eExit:

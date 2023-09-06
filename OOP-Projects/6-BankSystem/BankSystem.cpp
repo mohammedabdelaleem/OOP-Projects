@@ -198,9 +198,43 @@ void ShowClientsList()
   
 
 }
+
+void PrintClientRecordBalanceLine( clsBankClient &Client)
+{
+
+    cout << "|" << left << setw(15) << Client.AccountNumber();
+    cout << "|" << left << setw(25) << Client.FullName();
+    cout << "|" << left << setw(11) << Client.AccountBalance << "|" << endl;
+    cout << clsUtil::Get_N_Chars('-', 55) << endl;
+}
+
+void ShowTotalBalances()
+{
+    vector<clsBankClient>vClients = clsBankClient::GetClientsList();
+    double TotalBalances = clsBankClient::GetTotalBalances();
+
+    cout << clsUtil::Tabs(1) << "Total Balances List (" << vClients.size()<< ") Client(s).\n";
+
+    cout << clsUtil::Get_N_Chars('=', 55) << endl;
+    cout << "|" << left << setw(15) << "Account Number";
+    cout << "|" << left << setw(25) << "Client Name";
+    cout << "|" << left << setw(11) << "Balance" << "|" << endl;
+    cout << clsUtil::Get_N_Chars('=', 55) << endl;
+
+
+    for (clsBankClient& Client : vClients)
+    {
+        PrintClientRecordBalanceLine(Client);
+    }
+
+    cout << "\n" << clsUtil::Tabs(1) << "Total Balances = " << TotalBalances << endl;
+    cout << clsUtil::Tabs(1) <<"(" << clsUtil::NumberToText(TotalBalances)<<").";
+
+}
+
 int main()
 {
-    ShowClientsList();
+    ShowTotalBalances();
 
     system("pause>0");
     return 0;

@@ -1432,6 +1432,59 @@ static string Get_N_Chars(char ch = '-', short N = 50)
     return Str;
 }
 
+//A PowerFull Recursion Example
+static string NumberToText(ll Num)
+{
+    //Base Case
+    if (Num == 0)
+    {
+        return "";
+    }
+
+    //One To 99
+    if (Num >= 1 && Num <= 19)
+    {
+        string arr[] = { "One" , "Two" , "Three" , "Four" , "Five" , "Six" , "Seven" , "Eight" , "Nine" , "Ten" ,
+            "Eleven" , "Twelve" , "Therteen" , "Fourteen" , "Fifteen" ,
+            "sixteen" , "Seventeen" , "Eighteen" , "Ninteen"
+        };
+
+        return arr[Num - 1];  //15 => arr[14]="Fifteen"
+    }
+
+    if (Num >= 20 && Num <= 99)
+    {
+        string arr[] = { "","", "Twenty" , "Thirty" , "Fourty" , "Fifty" , "Sixty" , "Seventy" , "Eighty" , "Ninty" };
+
+        return arr[Num / 10] + " " + NumberToText(Num % 10);      //36 => arr[36/10 = (3)] = Thirty     + " " + NumberToText( (6) => "36%10")
+    }
+
+    //100 To 999
+    if (Num >= 100 && Num <= 999)
+    {
+        return NumberToText(Num / 100) + " Hundred " + NumberToText(Num % 100);
+    }
+
+    //1000 To 999999
+    if (Num >= 1000 && Num <= 999999)
+    {
+        return NumberToText(Num / 1000) + " Thousand " + NumberToText(Num % 1000);
+    }
+
+    //1 000 000 To 999 999 999
+    if (Num >= 1000000 && Num <= 999999999)
+    {
+        return NumberToText(Num / 1000000) + " Milion " + NumberToText(Num % 1000000);
+    }
+
+    //1 000 000 000 To 999 999 999 999
+    if (Num >= 1000000000 && Num <= 999999999999)
+    {
+        return NumberToText(Num / 1000000000) + " Billion " + NumberToText(Num % 1000000000);
+    }
+
+    //And So On
+}
 
 private:
     static bool CompareRight(short A, short B)

@@ -175,21 +175,23 @@ public:
 
 	/////////////////////////////////////////////
 
-	void Print()
-	{
-		//clsPerson::Print(); //Copy Paste Just For Formating.
-		cout << "\nClient Card Info:";
-		cout << "\n___________________________\n";
-		cout << "\nFirstName     : " << FirstName;
-		cout << "\nLastName      : " << LastName;
-		cout << "\nFull Name     : " << FullName();
-		cout << "\nEmail         : " << Email;
-		cout << "\nPhone         : " << Phone;
-		cout << "\nAcc. Num.     : " << _AccountNumber;
-		cout << "\nPassword      : " << PinCode;
-		cout << "\nAcc. Balance  : " << AccountBalance;
-		cout << "\n___________________________\n";
-	}
+	////No UI Related Inside Object...... 
+	//void Print()
+	//{
+	//	
+	//	//clsPerson::Print(); //Copy Paste Just For Formating.
+	//	cout << "\nClient Card Info:";
+	//	cout << "\n___________________________\n";
+	//	cout << "\nFirstName     : " << FirstName;
+	//	cout << "\nLastName      : " << LastName;
+	//	cout << "\nFull Name     : " << FullName();
+	//	cout << "\nEmail         : " << Email;
+	//	cout << "\nPhone         : " << Phone;
+	//	cout << "\nAcc. Num.     : " << _AccountNumber;
+	//	cout << "\nPassword      : " << PinCode;
+	//	cout << "\nAcc. Balance  : " << AccountBalance;
+	//	cout << "\n___________________________\n";
+	//}
 
 	//I Need A Way For Searching For A Client,If Found Make An Object Else Return An Empty Obj.
 	static clsBankClient Find(string AccountNumber)
@@ -337,3 +339,4 @@ public:
 };
 
 
+ 

@@ -2,6 +2,7 @@
 
 #include"clsClientListScreen.h"
 #include"clsAddNewClientScreen.h"
+#include"clsDeleteClientScreen.h"
 #include"clsInputValidate.h"
 #include"clsScreen.h"
 #include <iomanip>
@@ -37,7 +38,8 @@ private:
 
 	static void	_ShowDeleteClientScreen()
 	{
-		cout << "\nThis Is ShowDeleteClientScreen.\n\n";
+	//	cout << "\nThis Is ShowDeleteClientScreen.\n\n";
+		clsDeleteClientScreen::ShowDeleteClientScreen();
 	}
 
 	static void	_ShowUpdateClientScreen()

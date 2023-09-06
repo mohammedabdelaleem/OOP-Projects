@@ -4,7 +4,7 @@
 #include "clsInputValidate.h"
 #include"clsScreen.h"
 
-class clsAddNewClientScreen : clsScreen
+class clsAddNewClientScreen : protected clsScreen
 {
 
 private:

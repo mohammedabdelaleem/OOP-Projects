@@ -3,12 +3,11 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include <iomanip>
-
+#include"clsDepositeScreen.h"
 using namespace std;
 
 class clsTransactionsScreen :protected clsScreen
 {
-
 
 private:
     enum enTransactionsMenueOptions {
@@ -26,7 +25,8 @@ private:
 
     static void _ShowDepositScreen()
     {
-        cout << "\n Deposit Screen will be here.\n";
+       // cout << "\n Deposit Screen will be here.\n";
+        clsDepositeScreen::ShowDepositeScreen();
     }
 
     static void _ShowWithdrawScreen()
@@ -81,18 +81,12 @@ private:
             //do nothing here the main screen will handle it :-) ;
         }
         }
-
-
     }
-
-
 
 public:
 
-
     static void ShowTransactionsMenue()
     {
-
 
         system("cls");
         _DrawScreenHeader("\t  Transactions Screen");

@@ -9,6 +9,7 @@
 #include"clsInputValidate.h"
 #include"clsScreen.h"
 #include <iomanip>
+#include"clsManageUsersScreen.h"
 
 class clsMainScreen:protected clsScreen
 {
@@ -65,7 +66,8 @@ private:
 
 	static void	_ShowManageUsersMenu()
 	{
-		cout << "\nThis Is Show Manage Users Menu.\n\n";
+		//cout << "\nThis Is Show Manage Users Menu.\n\n";
+		clsManageUsersScreen::ShowManageUsersMenueScreen();
 	}
 
 
@@ -97,49 +99,42 @@ private:
 
 		case enMainMenuOption::eAddNewClient:
 			system("cls");
-			//load(5);
 			_ShowAddNewClientsScreen();
 			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eDeleteClent:
 			system("cls");
-			//load(5);
 			_ShowDeleteClientScreen();
 			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eUpdateClient:
 			system("cls");
-			//load(5);
 			_ShowUpdateClientScreen();
 			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eFindClient:
 			system("cls");
-			//load(5);
 			_ShowFindClientScreen();
 			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eTransactions:
 			system("cls");
-			//load(5);
 			_ShowTransactionMenu();
 			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eMangeUsers:
 			system("cls");
-			//load(5);
 			_ShowManageUsersMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eExit:
-			//load(5);
 			_ShowEndScreen();
-			//Login();
 			break;
 
 		}

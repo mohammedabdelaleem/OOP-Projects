@@ -3,6 +3,9 @@
 #include"clsClientListScreen.h"
 #include"clsAddNewClientScreen.h"
 #include"clsDeleteClientScreen.h"
+#include"clsUpdateClientScreen.h"
+#include"clsFindClientScreen.h"
+#include"clsTransactionsScreen.h"
 #include"clsInputValidate.h"
 #include"clsScreen.h"
 #include <iomanip>
@@ -16,7 +19,7 @@ private:
 		eDeleteClent = 3, eUpdateClient = 4, eFindClient = 5, eTransactions = 6, eMangeUsers = 7, eExit = 8
 	};
 
-	static void GoBackToMainMenu()
+	static void _GoBackToMainMenu()
 	{
 		cout << "\n\nPress Any Key To Back To Main Menu......";
 		system("Pause>0");
@@ -38,28 +41,31 @@ private:
 
 	static void	_ShowDeleteClientScreen()
 	{
-	//	cout << "\nThis Is ShowDeleteClientScreen.\n\n";
+	//	cout << "\nThis Is ShowDeleteClientScreen.\n\n"; 
 		clsDeleteClientScreen::ShowDeleteClientScreen();
 	}
 
 	static void	_ShowUpdateClientScreen()
 	{
-		cout << "\nThis Is ShowUpdateClientScreen.\n\n";
+		//cout << "\nThis Is ShowUpdateClientScreen.\n\n";
+		clsUpdateClientScreen::ShowUpdateClientScreen();
 	}
 
 	static void	_ShowFindClientScreen()
 	{
-		cout << "\nThis Is ShowFindClientScreen.\n\n";
+	//	cout << "\nThis Is ShowFindClientScreen.\n\n";
+		clsFindClientScreen::ShowFindClientScreen();
 	}
 
 	static void	_ShowTransactionMenu()
 	{
-		cout << "\nThis Is ShowTransactionMenu.\n\n";
+		//cout << "\nThis Is ShowTransactionMenu.\n\n";
+		clsTransactionsScreen::ShowTransactionsMenue();
 	}
 
 	static void	_ShowManageUsersMenu()
 	{
-		cout << "\nThis Is ShowManageUsersMenu.\n\n";
+		cout << "\nThis Is Show Manage Users Menu.\n\n";
 	}
 
 
@@ -86,42 +92,42 @@ private:
 			system("cls");
 			//load(5); //Windows Library Will Make A Problem 
 			_ShowAllClientsScreen();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eAddNewClient:
 			system("cls");
 			//load(5);
 			_ShowAddNewClientsScreen();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eDeleteClent:
 			system("cls");
 			//load(5);
 			_ShowDeleteClientScreen();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eUpdateClient:
 			system("cls");
 			//load(5);
 			_ShowUpdateClientScreen();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eFindClient:
 			system("cls");
 			//load(5);
 			_ShowFindClientScreen();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eTransactions:
 			system("cls");
 			//load(5);
 			_ShowTransactionMenu();
-			GoBackToMainMenu();
+			_GoBackToMainMenu();
 			break;
 
 		case enMainMenuOption::eMangeUsers:

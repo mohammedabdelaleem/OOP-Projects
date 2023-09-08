@@ -27,7 +27,7 @@ public:
       double TotalBalances = clsBankClient::GetTotalBalances();
 
       string Title = "\tTotal Balances Screen.";
-      string SubTitle = "\t(" + to_string(vClients.size()) + ") Client(s).";
+      string SubTitle = "\t  (" + to_string(vClients.size()) + ") Client(s).";
 
       _DrawScreenHeader(Title, SubTitle);
         

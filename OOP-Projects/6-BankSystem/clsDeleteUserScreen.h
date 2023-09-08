@@ -57,7 +57,6 @@ private:
     }
 
 
-
 public:
 
     static void ShowDeleteUserScreen()

@@ -22,7 +22,7 @@ private:
 
 	static clsBankClient _ConvertLineToClientObject(string sLine)
 	{
-		vector<string>vClientDate = clsString::SpiltString(sLine, "#//#");
+		vector<string>vClientDate = clsString::Spilt(sLine, "#//#");
 
 		return clsBankClient(enMode::UpdateMode, vClientDate[0], vClientDate[1], vClientDate[2]
 			, vClientDate[3], vClientDate[4], vClientDate[5], stof(vClientDate[6]));
@@ -250,6 +250,11 @@ public:
 		return (!BankClient.IsEmpty());
 	}
 
+	bool MarkedForDelete()
+	{
+		return _MarkedForDelete;
+	}
+
 	//Try To Separate Ui From A Class***************
 	enum enSaveResults {svFaildEmptyObject=0 , svSucceeded=1, svFaildAccountNumberExists=2};
 
@@ -335,6 +340,17 @@ public:
 
 	}
 
+	 void Deposite(double Amount)
+	{
+		_AccountBalance += Amount;
+		Save();
+	}
+
+	 void Withdraw(double Amount)
+	 {
+		 _AccountBalance -= Amount;
+		 Save();
+	 }
 
 };
 

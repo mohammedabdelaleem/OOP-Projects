@@ -7,6 +7,8 @@
 #include <fstream>
 
 using namespace std;
+const string UsersFileName = "UsersInfo.txt";
+
 class clsUser : public clsPerson
 {
 private:
@@ -21,8 +23,7 @@ private:
 
     static clsUser _ConvertLinetoUserObject(string Line, string Seperator = "#//#")
     {
-        vector<string> vUserData;
-        vUserData = clsString::Spilt(Line, Seperator);
+        vector<string> vUserData = clsString::Spilt(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
             vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
@@ -45,13 +46,13 @@ private:
 
     }
 
-    static  vector <clsUser> _LoadUsersDataFromFile()
+    static  vector <clsUser> _LoadUsersDataFromFile(string UsersFileName)
     {
 
         vector <clsUser> vUsers;
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open(UsersFileName, ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -75,22 +76,22 @@ private:
 
     }
 
-    static void _SaveUsersDataToFile(vector <clsUser> vUsers)
+    static void _SaveUsersDataToFile(string FileName,vector <clsUser> vUsers)
     {
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::out);//overwrite
+        MyFile.open(FileName, ios::out);//overwrite
 
         string DataLine;
 
         if (MyFile.is_open())
         {
 
-            for (clsUser U : vUsers)
+            for (clsUser& U : vUsers)
             {
-                if (U.MarkedForDeleted() == false)
+                if (!U.MarkedForDeleted() )
                 {
-                    //we only write records that are not marked for delete.  
+                    //we only write records that are Not marked for delete.  
                     DataLine = _ConverUserObjectToLine(U);
                     MyFile << DataLine << endl;
 
@@ -106,8 +107,7 @@ private:
 
     void _Update()
     {
-        vector <clsUser> _vUsers;
-        _vUsers = _LoadUsersDataFromFile();
+        vector <clsUser> _vUsers = _LoadUsersDataFromFile(UsersFileName);
 
         for (clsUser& U : _vUsers)
         {
@@ -119,25 +119,24 @@ private:
 
         }
 
-        _SaveUsersDataToFile(_vUsers);
+        _SaveUsersDataToFile(UsersFileName,_vUsers);
 
     }
 
     void _AddNew()
     {
-
-        _AddDataLineToFile(_ConverUserObjectToLine(*this));
+        _AddDataLineToFile(UsersFileName,_ConverUserObjectToLine(*this));
     }
 
-    void _AddDataLineToFile(string  stDataLine)
+    void _AddDataLineToFile(string FileName,string  sDataLine)
     {
         fstream MyFile;
-        MyFile.open("Users.txt", ios::out | ios::app);
+        MyFile.open(FileName, ios::out | ios::app);
 
         if (MyFile.is_open())
         {
 
-            MyFile << stDataLine << endl;
+            MyFile << sDataLine << endl;
 
             MyFile.close();
         }
@@ -149,13 +148,19 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+
+
 public:
+
+    enum enMainMenuePermissions {
+        eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4, pUpdateClients = 8,
+        pFindClient = 16, pTranactions = 32, pManageUsers = 64
+    };
 
     clsUser(enMode Mode, string FirstName, string LastName,
         string Email, string Phone, string UserName, string Password,
         int Permissions) :
         clsPerson(FirstName, LastName, Email, Phone)
-
     {
         _Mode = Mode;
         _UserName = UserName;
@@ -210,7 +215,7 @@ public:
     static clsUser Find(string UserName)
     {
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open(UsersFileName, ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -236,7 +241,7 @@ public:
     {
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open(UsersFileName, ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -304,15 +309,20 @@ public:
 
     static bool IsUserExist(string UserName)
     {
-
         clsUser User = clsUser::Find(UserName);
         return (!User.IsEmpty());
     }
 
     bool Delete()
     {
-        vector <clsUser> _vUsers;
-        _vUsers = _LoadUsersDataFromFile();
+        //Can't Remove The Admin.
+        if (_UserName == "Admin")
+        {
+            cout << "Can't Remove The Admin.\a\n";
+            return false;
+        }
+
+        vector <clsUser> _vUsers = _LoadUsersDataFromFile(UsersFileName);
 
         for (clsUser& U : _vUsers)
         {
@@ -324,7 +334,7 @@ public:
 
         }
 
-        _SaveUsersDataToFile(_vUsers);
+        _SaveUsersDataToFile(UsersFileName, _vUsers);
 
         *this = _GetEmptyUserObject();
 
@@ -339,7 +349,7 @@ public:
 
     static vector <clsUser> GetUsersList()
     {
-        return _LoadUsersDataFromFile();
+        return _LoadUsersDataFromFile(UsersFileName);
     }
 
 

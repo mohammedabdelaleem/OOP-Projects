@@ -9,7 +9,7 @@ class clsDeleteClientScreen : protected clsScreen
 
 private:
     
-    static void _Print(clsBankClient& Client)
+    static void _PrintClient(clsBankClient& Client)
     {
         //clsPerson::Print(); //Copy Paste Just For Formating.
         cout << "\nClient Card Info:";
@@ -39,7 +39,7 @@ private:
         }
 
         clsBankClient Client = clsBankClient::Find(AccountNumber);
-        _Print(Client);
+        _PrintClient(Client);
 
         char Choice = 'n';
         cout << "Are You Sure To Delete This Client? [Y/N] ";
@@ -50,7 +50,7 @@ private:
             if (Client.Delete())// Client Will Be Empty 
             {
                 cout << "\nClient Deleted Successfully.\n";
-                _Print(Client);
+                _PrintClient(Client);
             }
             else
             {

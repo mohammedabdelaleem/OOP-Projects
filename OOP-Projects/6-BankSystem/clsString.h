@@ -580,7 +580,7 @@ public:
 	//////////////////
 
 
-	static vector<string> SpiltString(string str, string delim = " ")
+	static vector<string> Spilt(string str, string delim = " ")
 	{
 		short Pos = 0;
 		string sWord;
@@ -622,7 +622,7 @@ public:
 
 	static string ReverseWords(string Str)
 	{
-		vector<string>vWords = SpiltString(Str);
+		vector<string>vWords = Spilt(Str);
 		ReverseStringVector(vWords);
 		return JoinString(vWords);
 	}
@@ -659,7 +659,7 @@ public:
 	//Math Case =>case sencetive
 	static string ReplaceWordInStringMatchedOrNot(string sBase, string StringToReplace, string ReplaceTo, bool IsMatch = true)
 	{
-		vector<string>vWords = SpiltString(sBase, " ");
+		vector<string>vWords = Spilt(sBase, " ");
 
 		for (string& Str : vWords)
 		{

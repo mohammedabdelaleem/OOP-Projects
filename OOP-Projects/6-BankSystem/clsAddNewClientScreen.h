@@ -54,8 +54,8 @@ private:
         {
         case  clsBankClient::enSaveResults::svSucceeded:
         {
-            cout << "\nAccount Added Successfully :-)\n";
-            _Print(NewClient);
+            cout << "\nClient Added Successfully :-)\n";
+            _PrintClient(NewClient);
             break;
         }
         case clsBankClient::enSaveResults::svFaildEmptyObject:
@@ -71,7 +71,7 @@ private:
         }
     }
 
-    static void _Print(clsBankClient& Client)
+    static void _PrintClient(clsBankClient& Client)
 	{
 		//clsPerson::Print(); //Copy Paste Just For Formating.
 		cout << "\nClient Card Info:";

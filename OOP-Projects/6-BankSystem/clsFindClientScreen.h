@@ -35,7 +35,7 @@ private:
         enSearchBy Choice;
         cout << endl << setw(37) << left << "" << "[1]Search By Account Number.\n";
         cout << setw(37) << left << "" << "[2]Search By Account Number And Pin Code .\n";
-        cout << setw(37) << left << "" << clsUtil::Get_N_Chars('-',50);
+        cout << setw(37) << left << "" << clsUtil::Get_N_Chars('-',50)<<"\n";
         //cout << setw(37) << left << "" << "Enter Your Choice: ";
         cout << setw(37) << left << "";
         Choice = (enSearchBy)clsInputValidate::ReadShortNumberBetween(1, 2);
@@ -59,6 +59,7 @@ private:
             {
                 cout << "\nClient Was not Found :-(\n";
             }
+            break;
         }
 
         case enSearchBy::sAccountNumberAndPinCode:
@@ -80,6 +81,7 @@ private:
             {
                 cout << "\nClient Was not Found :-(\n";
             }
+            break;
         }
 
         }

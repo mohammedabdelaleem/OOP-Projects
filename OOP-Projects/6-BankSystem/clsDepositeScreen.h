@@ -55,7 +55,7 @@ public:
 			if (toupper(Answer) == 'Y')
 			{
 				Client.Deposite(Amount);
-				cout << "\nDeposite Proccess Completed Successfully.\n New Balance Is : " << Client.AccountBalance +Amount<< endl;
+				cout << "\nDeposite Proccess Completed Successfully.\n New Balance Is : " << Client.AccountBalance << endl;
 			}
 			else
 			{

@@ -91,14 +91,14 @@ private:
 	static void _PrintUser( clsUser& User)
 	{
 		cout << "\nUser Info: \n";
-		cout << clsUtil::Get_N_Chars('-', 15);
+		cout << clsUtil::Get_N_Chars('-', 15)<<"\n";
 		cout << "User Name  : "<<User.UserName<<"\n";
 		cout << "Full Name  : " << User.FullName() << "\n";
 		cout << "Email      : " << User.Email << "\n";
 		cout << "Phone      : " << User.Phone << "\n";
 		cout << "Password   : " << User.Password << "\n";
 		cout << "Permissions: " << User.Permissions << "\n";
-		cout << clsUtil::Get_N_Chars('-', 15);
+		cout << clsUtil::Get_N_Chars('-', 15)<<"\n";
 	}
 
 	static void _AddNewUser()

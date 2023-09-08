@@ -7,10 +7,10 @@
 class clsUsersListScreen :protected clsScreen
 {
 
-	static void _PrintShowClientsHeader(short NumberOfUsers)
+	static void _PrintShowUsersHeader(short NumberOfUsers)
 	{
 		string Title = "\tUsers List Screen.";
-		string SubTitle = "\t(" + to_string(NumberOfUsers) + ") User(s).";
+		string SubTitle = "\t  (" + to_string(NumberOfUsers) + ") User(s).";
 		_DrawScreenHeader(Title, SubTitle);
 
 		cout << setw(8) << left << "" << clsUtil::Get_N_Chars('-', 96)<<"\n";
@@ -39,7 +39,7 @@ public:
 	static void ShowUsersListScreen()
 	{
 		vector<clsUser>vUsers = clsUser::GetUsersList();
-		_PrintShowClientsHeader(vUsers.size());
+		_PrintShowUsersHeader(vUsers.size());
 
 		if (vUsers.size())
 		{

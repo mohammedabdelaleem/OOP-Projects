@@ -3,6 +3,10 @@
 #include "clsScreen.h"
 #include "clsInputValidate.h"
 #include <iomanip>
+#include"clsUsersListScreen.h"
+#include"clsAddNewUserScreen.h"
+#include"clsDeleteUserScreen.h"
+
 
 using namespace std;
 
@@ -33,20 +37,20 @@ private:
     //This Called Stup In Programming -> You Create A Function Without Its Implementation Then Make Sure The Flow Going Wright After That Go Back To Each Stup Then Implement It. 
     static void _ShowListUsersScreen()
     {
-        cout << "\nList Users Screen Will Be Here.\n";
-
+       // cout << "\nList Users Screen Will Be Here.\n";
+        clsUsersListScreen::ShowUsersListScreen();
     }
 
     static void _ShowAddNewUserScreen()
     {
-        cout << "\nAdd New User Screen Will Be Here.\n";
-
+     //   cout << "\nAdd New User Screen Will Be Here.\n";
+        clsAddNewUserScreen::AddNewUserScreen();
     }
 
     static void _ShowDeleteUserScreen()
     {
-        cout << "\nDelete User Screen Will Be Here.\n";
-
+      //  cout << "\nDelete User Screen Will Be Here.\n";
+        clsDeleteUserScreen::ShowDeleteUserScreen();
     }
 
     static void _ShowUpdateUserScreen()
@@ -113,8 +117,6 @@ private:
         }
 
     }
-
-
 
 public:
 

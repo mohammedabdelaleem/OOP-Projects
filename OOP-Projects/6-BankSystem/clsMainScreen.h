@@ -10,6 +10,7 @@
 #include"clsScreen.h"
 #include <iomanip>
 #include"clsManageUsersScreen.h"
+#include"Global.h"
 
 class clsMainScreen:protected clsScreen
 {
@@ -85,6 +86,12 @@ private:
 		cout << "\n------------------------------------------";
 	}
 
+	static void _Logout()
+	{
+		CurrentUser = clsUser::Find("", "");
+		//Then It Will Go Back To Main Function.
+	}
+
 	//Performe Main Menu Option
 	static void _PerformMainMenuOption(enMainMenuOption MainMenuOption)
 	{
@@ -134,6 +141,7 @@ private:
 			break;
 
 		case enMainMenuOption::eExit:
+			_Logout();
 			_ShowEndScreen();
 			break;
 

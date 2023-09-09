@@ -11,6 +11,7 @@
 #include <iomanip>
 #include"clsManageUsersScreen.h"
 #include"Global.h"
+#include"clsLoginScreen.h"
 
 class clsMainScreen:protected clsScreen
 {
@@ -78,18 +79,22 @@ private:
 		return clsInputValidate::ReadShortNumberBetween( From, To);
 	}
 
-	static void _ShowEndScreen()
-	{
-		system("cls");
-		cout << "\n------------------------------------------";
-		cout << "\n**************End Of Program************** ";
-		cout << "\n------------------------------------------";
-	}
+	//static void _ShowEndScreen()
+	//{
+	//	system("cls");
+	//	cout << "\n------------------------------------------";
+	//	cout << "\n**************End Of Program************** ";
+	//	cout << "\n------------------------------------------";
+	//}
 
 	static void _Logout()
 	{
 		CurrentUser = clsUser::Find("", "");
 		//Then It Will Go Back To Main Function.
+		
+
+		//This Is Called Circular Reference , Compiler Confiused Here ==>LoginScreen called MainMenu ,At MainMenu You Called LoginScreen And So On....
+	//	clsLoginScreen::ShowLoginScreen();
 	}
 
 	//Performe Main Menu Option
@@ -141,9 +146,11 @@ private:
 			break;
 
 		case enMainMenuOption::eExit:
+		{
 			_Logout();
-			_ShowEndScreen();
+			//_ShowEndScreen();
 			break;
+		}
 
 		}
 	}

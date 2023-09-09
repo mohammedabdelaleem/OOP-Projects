@@ -2,9 +2,11 @@
 
 int main()
 {
+	while (true)
+	{
+		clsLoginScreen::ShowLoginScreen();
+	}
   
-    //clsMainScreen::ShowMainMenu();
-    clsLoginScreen::ShowLoginScreen();
 
 
     system("pause>0");

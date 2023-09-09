@@ -20,14 +20,18 @@ protected:
         cout << "\n\t\t\t\t\t______________________________________\n\n";
     }
 
+    static void moveCursor(int row, int col) {/////////////
+        cout << "\033[" << row << ";" << col << "H"; //33 Escape character
+    }
 
     static bool CheckAccessRights(clsUser::enMainMenuePermissions Permission)
     {
         if (!CurrentUser.CheckAccessPermission(Permission))
         {
-            cout << "\t\t\t\t\t______________________________________";
+            moveCursor(80, 80);
+            cout << "\n\t\t\t\t\t______________________________________";
             cout << "\n\n\t\t\t\t\t  Access Denied! Contact your Admin.";
-            cout << "\n\t\t\t\t\t______________________________________\n\n";
+            cout << "\n\t\t\t\t\t______________________________________\n\n\a";
             return false;
         }
         else

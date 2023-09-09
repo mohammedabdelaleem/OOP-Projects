@@ -92,6 +92,10 @@ public:
 
     static void ShowAddNewClientScreen()
     {
+        if (!CheckAccessRights(clsUser::enMainMenuePermissions::pAddNewClient))
+        {
+            return;
+        }
         _DrawScreenHeader("\tAdd New Client");
 
         _AddNewClient();

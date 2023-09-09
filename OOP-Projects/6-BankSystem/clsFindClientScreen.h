@@ -94,6 +94,11 @@ public:
 
   static void ShowFindClientScreen()
     {
+      if (!CheckAccessRights(clsUser::enMainMenuePermissions::pFindClient))
+      {
+          return;
+      }
+
         _DrawScreenHeader("\tFind Client Screen");
         _PerformFindClient();
     }

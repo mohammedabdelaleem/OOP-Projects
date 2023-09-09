@@ -34,6 +34,13 @@ private:
             UserName = clsInputValidate::ReadString();
         }
 
+        //Can't Remove The Admin.
+        if (UserName == "Admin")
+        {
+            cout << "\n\nCan't Remove The Admin.\a\n";
+            return;
+        }
+
         clsUser User = clsUser::Find(UserName);
         _PrintUser(User);
 

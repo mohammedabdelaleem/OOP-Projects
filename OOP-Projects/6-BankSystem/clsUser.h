@@ -315,13 +315,6 @@ public:
 
     bool Delete()
     {
-        //Can't Remove The Admin.
-        if (_UserName == "Admin")
-        {
-            cout << "Can't Remove The Admin.\a\n";
-            return false;
-        }
-
         vector <clsUser> _vUsers = _LoadUsersDataFromFile(UsersFileName);
 
         for (clsUser& U : _vUsers)
@@ -352,6 +345,12 @@ public:
         return _LoadUsersDataFromFile(UsersFileName);
     }
 
+
+    ////////////////////Permissoins///////////////////
+     bool CheckAccessPermission(enMainMenuePermissions Permission)
+    {
+        return ((this->Permissions == enMainMenuePermissions::eAll) || ((Permission & this->Permissions)==Permission));
+    }
 
 };
 

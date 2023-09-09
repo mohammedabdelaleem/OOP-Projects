@@ -3,7 +3,7 @@
 #include"clsScreen.h"
 #include"clsBankClient.h"
 #include"clsUtil.h"
-
+#include"Global.h"
 
 class clsClientListScreen:protected  clsScreen
 {
@@ -40,8 +40,14 @@ private:
 
 public:
 
-   static void ShowClientsList()
+   static void ShowClientsListScreen()
     {
+       if (!CheckAccessRights(clsUser::enMainMenuePermissions::pListClients))
+       {
+           return;
+       }
+
+
         vector<clsBankClient>vClients = clsBankClient::GetClientsList();
 
         PrintShowClientsHeader(vClients.size());

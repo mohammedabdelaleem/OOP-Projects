@@ -66,6 +66,11 @@ public:
 
     static void ShowDeleteClientScreen()
     {
+        if (!CheckAccessRights(clsUser::enMainMenuePermissions::pDeleteClient))
+        {
+            return;
+        }
+
         _DrawScreenHeader("\tDelete Client");
         _DeleteCLient();
     }

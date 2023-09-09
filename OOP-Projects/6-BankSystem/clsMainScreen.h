@@ -33,7 +33,7 @@ private:
 	static void _ShowAllClientsScreen()
 	{
 		//cout << "\nThis Is Show All Clients Screen.\n\n";
-		clsClientListScreen::ShowClientsList();
+		clsClientListScreen::ShowClientsListScreen();
 	}
 
 	static void _ShowAddNewClientsScreen()

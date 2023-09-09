@@ -93,6 +93,11 @@ public:
     static void ShowTransactionsMenue()
     {
 
+        if (!CheckAccessRights(clsUser::enMainMenuePermissions::pTranactions))
+        {
+            return;
+        }
+
         system("cls");
         _DrawScreenHeader("\t  Transactions Screen");
 

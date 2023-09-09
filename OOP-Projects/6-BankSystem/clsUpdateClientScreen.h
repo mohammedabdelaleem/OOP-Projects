@@ -105,6 +105,11 @@ private:
 public:
     static void ShowUpdateClientScreen()
     {
+        if (!CheckAccessRights(clsUser::enMainMenuePermissions::pUpdateClients))
+        {
+            return;
+        }
+
         _DrawScreenHeader("\tUpdate Client");
         UpdateClient();
     }

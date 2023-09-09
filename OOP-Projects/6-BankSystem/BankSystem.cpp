@@ -2,14 +2,17 @@
 
 int main()
 {
+
 	while (true)
 	{
-		clsLoginScreen::ShowLoginScreen();
+		//Be Carefull From Circular Reference
+		if (!clsLoginScreen::ShowLoginScreen())
+		{
+			break;
+		}
+
 	}
-  
 
-
-    system("pause>0");
     return 0;
 }
 

@@ -1,55 +1,67 @@
 #pragma once
 
-#include"clsScreen.h"
-#include"clsUser.h"
-#include"clsMainScreen.h"
+#include <iostream>
+#include "clsScreen.h"
+#include "clsUser.h"
+#include <iomanip>
+#include "clsMainScreen.h"
+#include "Global.h"
 
-#include"Global.h"
-
-class clsLoginScreen:protected clsScreen
+class clsLoginScreen :protected clsScreen
 {
-static	void _Login()
-	{
 
-		bool LoginFaild = false;
-		string UserName, Password;
+private:
 
-		do
-		{
+    static  bool _Login()
+    {
+        bool LoginFaild = false;
+        short FaildLoginCount = 0;
 
-			if (LoginFaild)
-			{
-				cout << "\nInvalid UserName/Password!\n\n";
-			}
+        string Username, Password;
+        do
+        {
 
-			cout << "Enter UserName : ";
-			UserName=clsInputValidate::ReadString();
+            if (LoginFaild)
+            {
+                FaildLoginCount++;
 
-			cout << "Enter Password : ";
-			Password = clsInputValidate::ReadString();
+                cout << "\nInvlaid Username/Password!";
+                cout << "\nYou have " << (3 - FaildLoginCount)
+                    << " Trial(s) to login.\n\n";
+            }
 
-			//I Define CurrentUser And Make It Globaly For The Whole System.
-			//I Need Its Accessability From The Whole Classes To Him. 
-			//Each Class Incude [#include"Global.h"] Can Access The Current User. 
-			 CurrentUser=clsUser::Find(UserName, Password);
-			 LoginFaild = CurrentUser.IsEmpty();
+            if (FaildLoginCount == 3)
+            {
+                cout << "\nYour are Locked after 3 faild trails \n\n";
+                return false;
+            }
 
-		} while (LoginFaild);
+            cout << "Enter Username? ";
+            cin >> Username;
 
-		clsMainScreen::ShowMainMenu();
-	}
+            cout << "Enter Password? ";
+            cin >> Password;
 
+            CurrentUser = clsUser::Find(Username, Password);
 
+            LoginFaild = CurrentUser.IsEmpty();
+
+        } while (LoginFaild);
+
+          clsMainScreen::ShowMainMenu();
+        return true;
+    }
 
 public:
 
-	static void ShowLoginScreen()
-	{
-		system("cls");
-		_DrawScreenHeader("\t  Login Screen");
-		_Login();
 
-	}
-	
+    static bool ShowLoginScreen()
+    {
+        system("cls");
+        _DrawScreenHeader("\t    Login Screen");
+        return _Login();
+
+    }
+
 };
 

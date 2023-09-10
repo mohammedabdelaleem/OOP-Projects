@@ -6,11 +6,13 @@
 #include <vector>
 #include <fstream>
 #include"clsDate.h"
+#include"clsUtil.h"
 
 using namespace std;
 
 const string UsersFileName = "UsersInfo.txt";
 const string RegisterdUsersFileName = "FlieRegister.txt";
+
 
 class clsUser : public clsPerson
 {
@@ -31,7 +33,7 @@ private:
         vector<string> vUserData = clsString::Spilt(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+            vUserData[3], vUserData[4],clsUtil::DecryptText( vUserData[5]), stoi(vUserData[6]));
 
     }
 
@@ -41,7 +43,7 @@ private:
         stLoginRegisterRecord UserRecord;
         UserRecord.DateTime = vRecord[0];
         UserRecord.UserName = vRecord[1];
-        UserRecord.Password = vRecord[2]; 
+        UserRecord.Password = clsUtil::DecryptText(vRecord[2]);
         UserRecord.Permissions = stoi(vRecord[3]);
 
         return UserRecord;
@@ -55,8 +57,8 @@ private:
         UserRecord += User.LastName + Seperator;
         UserRecord += User.Email + Seperator;
         UserRecord += User.Phone + Seperator;
-        UserRecord += User.UserName + Seperator;
-        UserRecord += User.Password + Seperator;
+        UserRecord +=User.UserName + Seperator;
+        UserRecord += clsUtil::EncryptText(User.Password) + Seperator;
         UserRecord += to_string(User.Permissions);
 
         return UserRecord;
@@ -201,7 +203,7 @@ private:
     {
       string LogInRecord = clsDate::GetSystemDateTimeString();
         LogInRecord += Separator + UserName;
-        LogInRecord += Separator + Password;
+        LogInRecord += Separator + clsUtil::EncryptText(Password);
         LogInRecord += Separator + to_string(Permissions);
 
         return LogInRecord;
@@ -221,9 +223,9 @@ public:
         pFindClient = 16, pTranactions = 32, pManageUsers = 64,pListLoginRegister=128
     };
 
-    clsUser(enMode Mode, string FirstName, string LastName,
-        string Email, string Phone, string UserName, string Password,
-        int Permissions) :
+    clsUser(enMode Mode=enMode::EmptyMode, string FirstName="", string LastName = "",
+        string Email = "", string Phone = "", string UserName = "", string Password = "",
+        int Permissions=0) :
         clsPerson(FirstName, LastName, Email, Phone)
     {
         _Mode = Mode;
@@ -310,9 +312,10 @@ public:
         if (MyFile.is_open())
         {
             string Line;
+            clsUser User;
             while (getline(MyFile, Line))
             {
-                clsUser User = _ConvertLinetoUserObject(Line);
+                User= _ConvertLinetoUserObject(Line);
                 if (User.UserName == UserName && User.Password == Password)
                 {
                     MyFile.close();

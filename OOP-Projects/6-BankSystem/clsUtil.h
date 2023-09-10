@@ -1486,6 +1486,7 @@ static string NumberToText(ll Num)
     //And So On
 }
 
+
 private:
     static bool CompareRight(short A, short B)
     {

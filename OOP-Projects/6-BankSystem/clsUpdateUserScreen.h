@@ -75,6 +75,11 @@ private:
             cin >> Choice;
             if (toupper(Choice) == 'Y')
                 Permission += clsUser::enMainMenuePermissions::pManageUsers;
+
+            cout << "\nShow Login Registers? [Y/N]?";
+            cin >> Choice;
+            if (toupper(Choice) == 'Y')
+                Permission += clsUser::enMainMenuePermissions::pListLoginRegister;
         }
 
         return Permission;

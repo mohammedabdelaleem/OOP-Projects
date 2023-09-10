@@ -13,7 +13,8 @@ const string TransferLogFileName = "TransferLog.txt";
 class clsBankClient : public clsPerson
 {
 private:
-
+	struct stTransferLogRecord;
+	
 	enum enMode { EmptyMode = 0, UpdateMode = 1 ,AddNewMode=2};
 	enMode _Mode;
 
@@ -21,6 +22,8 @@ private:
 	string _PinCode;
 	float _AccountBalance;
 	bool _MarkedForDelete=false;
+
+	
 
 	static clsBankClient _ConvertLineToClientObject(string sLine)
 	{
@@ -45,6 +48,23 @@ private:
 		return sClient;
 	}
 
+	static stTransferLogRecord _ConvertLineToTransferLogRecord(string Line)
+	{
+		vector<string>vRecordLine=clsString::Spilt(Line,"#//#");
+
+		stTransferLogRecord Record;
+
+		Record.DateTime = vRecordLine[0];
+		Record.SourceAccountNumber = vRecordLine[1];
+		Record.DestinationAccountNumber = vRecordLine[2];
+		Record.Amount =stoi(vRecordLine[3]);
+		Record.SourceBalanceAfter = stoi(vRecordLine[4]);
+		Record.DestinationBalanceAfter = stoi(vRecordLine[5]);
+		Record.UserName = vRecordLine[6];
+
+		return Record;
+	}
+
 	static vector<clsBankClient> _LoadClientsDateFromFile(string FileName)
 	{
 		fstream MyFile;
@@ -64,6 +84,28 @@ private:
 
 		MyFile.close();
 		return vClients;
+	}
+
+	static vector<stTransferLogRecord>_LoadTransferLogRecordsFromFile()
+	{
+		fstream MyFile;
+		MyFile.open(TransferLogFileName, ios::in);
+
+		vector<stTransferLogRecord>vTransferLogRecord;
+		stTransferLogRecord Record;
+
+		if (MyFile.is_open())
+		{
+			string sLine;
+			while (getline(MyFile, sLine))
+			{
+				Record = _ConvertLineToTransferLogRecord(sLine);
+				vTransferLogRecord.push_back(Record);
+			}
+		}
+
+		MyFile.close();
+		return vTransferLogRecord;
 	}
 
 	static void _SaveCleintsDataToFile(string FileName, vector<clsBankClient>& vClients)
@@ -166,6 +208,17 @@ public:
 		_PinCode = PinCode;
 		_AccountBalance = AccountBalance;
 	}
+
+	struct stTransferLogRecord
+	{
+		string DateTime;
+		string	SourceAccountNumber;
+		string DestinationAccountNumber;
+		double Amount;
+		double SourceBalanceAfter;
+		double DestinationBalanceAfter;
+		string UserName;
+	};
 
 	bool IsEmpty()
 	{
@@ -395,7 +448,10 @@ public:
 		 _RegisterTransferLog(Amount, DestinationClient);
 	 }
 
-
+	  static vector<stTransferLogRecord>GetTransferLogList()
+	  {
+		  return _LoadTransferLogRecordsFromFile();
+	  }
 	
 };
 

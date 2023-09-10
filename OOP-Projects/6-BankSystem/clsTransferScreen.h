@@ -68,7 +68,7 @@ public:
 			string AccountNum2 = _ReadAccountNumber("To");
 			while (AccountNum2== AccountNum1)
 			{
-				cout << "\nWhat Are You Doing ,How Can You Transfer Youself Into The Same AccountNumber?\a\a\n";
+				cout << "\nWhat Are You Doing ,How Can You Transfer To Youself Into The Same AccountNumber?\a\a\n";
 				AccountNum2 = _ReadAccountNumber("To");
 			}
 			

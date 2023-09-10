@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "clsScreen.h"
 #include "clsUser.h"
 #include <iomanip>
@@ -48,6 +47,7 @@ private:
 
         } while (LoginFaild);
 
+        CurrentUser.RegisterLogin();
           clsMainScreen::ShowMainMenu();
         return true;
     }

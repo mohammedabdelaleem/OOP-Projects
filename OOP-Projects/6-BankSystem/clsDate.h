@@ -1288,7 +1288,7 @@ public:
   */
 
 
-static string DateToString(clsDate& Date)/////////////////////////////////Simple,simple
+static string DateToString(clsDate Date)/////////////////////////////////Simple,simple
  {
      return to_string(Date._Day) + "/" + to_string(Date._Month) + "/" + to_string(Date._Year);
  }
@@ -1357,6 +1357,25 @@ clsDate GetSmallDate(clsDate& Date2)
 {
     return GetSmallDate(*this, Date2);
 }
+
+
+static string GetSystemDateTimeString()
+{
+    time_t t = time(0);  // get time now
+
+    tm* now = localtime(&t);
+
+     string sDate =to_string(now->tm_mday);
+     sDate +="/" +to_string(now->tm_mon + 1);
+     sDate += "/" + to_string(now->tm_year + 1900);
+
+    string sTime = to_string(now->tm_hour);
+    sTime += ":" + to_string(now->tm_min);
+    sTime += ":" + to_string(now->tm_sec);
+
+    return sDate+" - "+ sTime;
+}
+
 
 
 };

@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include"clsDate.h"
 
 using namespace std;
 const string UsersFileName = "UsersInfo.txt";
@@ -148,7 +149,15 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    string _PrepareLogInRecord(string Separator="#//#")
+    {
+      string LogInRecord = clsDate::GetSystemDateTimeString();
+        LogInRecord += Separator + UserName;
+        LogInRecord += Separator + Password;
+        LogInRecord += Separator + to_string(Permissions);
 
+        return LogInRecord;
+  }
 
 public:
 
@@ -351,6 +360,21 @@ public:
     {
         return ((this->Permissions == enMainMenuePermissions::eAll) || ((Permission & this->Permissions)==Permission));
     }
+
+     void RegisterLogin()
+     {
+         string sDateLine = _PrepareLogInRecord();
+
+         fstream MyFile;
+         MyFile.open("FlieRegister.txt", ios::app | ios::out);
+
+         if (MyFile.is_open())
+         {
+             MyFile << sDateLine << endl;
+
+             MyFile.close();
+         }
+     }
 
 };
 

@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include"clsInterfaceCommunication.h"
+
 using namespace std;
 
-class clsPerson
+class clsPerson:clsInterfaceCommunication
 {
 
 private:
@@ -93,6 +95,23 @@ public:
         cout << "\n___________________\n";
 
     }
+
+    void SendEmail(string Title, string Body)
+    {
+
+    }
+
+    void SendFax(string Title, string Body)
+    {
+
+     }
+
+    void SendSMS(string Title, string Body)
+    {
+
+     }
+
+
 
 };
 

@@ -5,8 +5,10 @@
 
 #include "clsPerson.h"
 #include "clsString.h"
+#include"Global.h"
 
 const string FileName = "ClientsInfo.txt";
+const string TransferLogFileName = "TransferLog.txt";
 
 class clsBankClient : public clsPerson
 {
@@ -123,6 +125,37 @@ private:
 			MyFile.close();
 		}
 	}
+
+
+
+	 string _PrepareTransferLogRecord(double Amount, clsBankClient& DestinationClient,string Separator="#//#")
+	{
+		 //Date/Time , AccountFrom , AccountTo , Amount , BalanceFromAfter ,BalanceToAfter, ResposableUser
+		string CurrentTransferLog = clsDate::GetSystemDateTimeString()+Separator;
+		CurrentTransferLog += (_AccountNumber + Separator);
+		CurrentTransferLog += DestinationClient.AccountNumber() + Separator;
+		CurrentTransferLog += to_string(Amount) + Separator;
+		CurrentTransferLog += to_string (AccountBalance) + Separator;
+		CurrentTransferLog += to_string(DestinationClient.AccountBalance) + Separator;
+		CurrentTransferLog += CurrentUser.UserName;
+
+		return CurrentTransferLog;
+	}
+
+	 void _RegisterTransferLog(double Amount, clsBankClient& DestinationClient)
+	 {
+		 string TransferLogLine = _PrepareTransferLogRecord(Amount, DestinationClient);
+
+		 fstream MyFile;
+		 MyFile.open(TransferLogFileName, ios::out | ios::app);
+
+		 if (MyFile.is_open())
+		 {
+			 MyFile << TransferLogLine << endl;
+
+			 MyFile.close();
+		 }
+	 }
 
 public:
 	clsBankClient(enMode Mode=enMode::EmptyMode, string FirstName="", string LastName = "", string Email = "",
@@ -358,8 +391,12 @@ public:
 		  //I Validate Amount From Transfer Screen.
 		 Withdraw(Amount);
 		 DestinationClient.Deposite(Amount);
+
+		 _RegisterTransferLog(Amount, DestinationClient);
 	 }
 
+
+	
 };
 
 

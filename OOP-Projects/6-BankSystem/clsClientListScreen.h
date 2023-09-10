@@ -9,7 +9,7 @@ class clsClientListScreen:protected  clsScreen
 {
 private:
 
-    static void  PrintShowClientsHeader(short ClientsNumber)
+    static void  PrintClientsHeader(short ClientsNumber)
     {
       //  cout << setw(8) << left << clsUtil::Tabs(4) << "Clients List (" << ClientsNumber << ") Client(s).\n";
 
@@ -50,7 +50,7 @@ public:
 
         vector<clsBankClient>vClients = clsBankClient::GetClientsList();
 
-        PrintShowClientsHeader(vClients.size());
+        PrintClientsHeader(vClients.size());
 
         if (vClients.size())
         {

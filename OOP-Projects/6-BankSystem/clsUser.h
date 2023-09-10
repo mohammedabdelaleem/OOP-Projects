@@ -8,17 +8,21 @@
 #include"clsDate.h"
 
 using namespace std;
+
 const string UsersFileName = "UsersInfo.txt";
+const string RegisterdUsersFileName = "FlieRegister.txt";
 
 class clsUser : public clsPerson
 {
 private:
-
+    struct stLoginRegisterRecord;
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
     string _UserName;
     string _Password;
     int _Permissions;
+
+
 
     bool _MarkedForDelete = false;
 
@@ -29,6 +33,18 @@ private:
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
             vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
 
+    }
+
+    static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
+    {
+        vector<string>vRecord = clsString::Spilt(Line, Seperator);
+        stLoginRegisterRecord UserRecord;
+        UserRecord.DateTime = vRecord[0];
+        UserRecord.UserName = vRecord[1];
+        UserRecord.Password = vRecord[2]; 
+        UserRecord.Permissions = stoi(vRecord[3]);
+
+        return UserRecord;
     }
 
     static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
@@ -47,13 +63,14 @@ private:
 
     }
 
-    static  vector <clsUser> _LoadUsersDataFromFile(string UsersFileName)
+
+    static  vector <clsUser> _LoadUsersDataFromFile(string FileName)
     {
 
         vector <clsUser> vUsers;
 
         fstream MyFile;
-        MyFile.open(UsersFileName, ios::in);//read Mode
+        MyFile.open(FileName, ios::in);//read Mode
 
         if (MyFile.is_open())
         {
@@ -76,6 +93,37 @@ private:
         return vUsers;
 
     }
+
+    static vector<stLoginRegisterRecord> _LoadLoginRegisterDateFromFile(string FileName)
+    {
+        vector <stLoginRegisterRecord> vUsers;
+
+        fstream MyFile;
+        MyFile.open(RegisterdUsersFileName, ios::in);//read Mode
+
+        if (MyFile.is_open())
+        {
+
+            string Line;
+
+            stLoginRegisterRecord LoginRegisterRecord;
+
+            while (getline(MyFile, Line))
+            {
+
+                 LoginRegisterRecord = _ConvertLoginRegisterLineToRecord(Line);
+
+                vUsers.push_back(LoginRegisterRecord);
+            }
+
+            MyFile.close();
+
+        }
+
+        return vUsers;
+
+    }
+ 
 
     static void _SaveUsersDataToFile(string FileName,vector <clsUser> vUsers)
     {
@@ -159,11 +207,18 @@ private:
         return LogInRecord;
   }
 
+
 public:
+    struct stLoginRegisterRecord {
+        string DateTime;
+        string UserName;
+        string Password;
+        int Permissions;
+    };
 
     enum enMainMenuePermissions {
         eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4, pUpdateClients = 8,
-        pFindClient = 16, pTranactions = 32, pManageUsers = 64
+        pFindClient = 16, pTranactions = 32, pManageUsers = 64,pListLoginRegister=128
     };
 
     clsUser(enMode Mode, string FirstName, string LastName,
@@ -375,6 +430,12 @@ public:
              MyFile.close();
          }
      }
+
+     static vector<stLoginRegisterRecord> GetLoginRegisterList()
+     {
+         return _LoadLoginRegisterDateFromFile(RegisterdUsersFileName);
+     }
+   
 
 };
 

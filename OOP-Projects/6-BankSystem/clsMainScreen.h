@@ -12,6 +12,7 @@
 #include"clsManageUsersScreen.h"
 #include"Global.h"
 #include"clsLoginScreen.h"
+#include"clsLoginRegisterScreen.h"
 
 class clsMainScreen:protected clsScreen
 {
@@ -19,7 +20,7 @@ private:
 
 	enum enMainMenuOption {
 		eListClients = 1, eAddNewClient = 2,
-		eDeleteClent = 3, eUpdateClient = 4, eFindClient = 5, eTransactions = 6, eMangeUsers = 7, eExit = 8
+		eDeleteClent = 3, eUpdateClient = 4, eFindClient = 5, eTransactions = 6, eMangeUsers = 7,eLoginRegister=8 ,eExit = 9
 	};
 
 	static void _GoBackToMainMenu()
@@ -70,6 +71,11 @@ private:
 	{
 		//cout << "\nThis Is Show Manage Users Menu.\n\n";
 		clsManageUsersScreen::ShowManageUsersMenueScreen();
+	}
+
+	static void	_ShowLoginRegisterScreen()
+	{
+		clsLoginRegisterScreen::ShowRegisterdUsersList();
 	}
 
 
@@ -145,6 +151,12 @@ private:
 			_GoBackToMainMenu();
 			break;
 
+		case enMainMenuOption::eLoginRegister:
+			system("cls");
+			_ShowLoginRegisterScreen();
+			_GoBackToMainMenu();
+			break;
+
 		case enMainMenuOption::eExit:
 		{
 			_Logout();
@@ -174,10 +186,11 @@ public:
 		cout <<setw(37)<<left<<""<< "\t[5] Find Client.\n";
 		cout <<setw(37)<<left<<""<< "\t[6] Transactions.\n";
 		cout <<setw(37)<<left<<""<< "\t[7] Manage Users.\n";
-		cout <<setw(37)<<left<<""<< "\t[8] Logout\n";	   
+		cout <<setw(37)<<left<< ""<<"\t[8] Login Register.\n";
+		cout <<setw(37)<<left<<""<< "\t[9] Logout\n";	   
 		cout << setw(37) << left << ""<< "============================================\n";
 
-		_PerformMainMenuOption((enMainMenuOption)_ReadOption("Enter Your Choice: ", 1, 8));
+		_PerformMainMenuOption((enMainMenuOption)_ReadOption("Enter Your Choice: ", 1, 9));
 	}
 
 

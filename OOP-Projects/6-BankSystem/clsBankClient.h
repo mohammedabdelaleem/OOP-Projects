@@ -352,6 +352,14 @@ public:
 		 Save();
 	 }
 
+	 //This For Object Not For The Whole Objects->Don't Make It Static.
+	  void Transfer(double Amount, clsBankClient& DestinationClient)
+	 {
+		  //I Validate Amount From Transfer Screen.
+		 Withdraw(Amount);
+		 DestinationClient.Deposite(Amount);
+	 }
+
 };
 
 

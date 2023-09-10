@@ -435,7 +435,7 @@ public:
      {
          return _LoadLoginRegisterDateFromFile(RegisterdUsersFileName);
      }
-   
+
 
 };
 

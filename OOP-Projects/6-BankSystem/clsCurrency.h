@@ -239,4 +239,27 @@ public:
     {
         return _LoadCurrencysDataFromFile();
     }
+
+
+
+    float ConvretToUSD(float Amount)
+    {
+        return Amount / Rate();
+    }
+
+    float ConvertToOhterCurrency(float Amount, clsCurrency Currency2)
+    {
+        float AmountInUSD = ConvretToUSD(Amount);
+
+        if (Currency2.CurrencyCode() == "USD")
+        {
+            return AmountInUSD;
+        }
+        else
+        {
+            return AmountInUSD * Currency2.Rate();
+        }
+
+
+    }
 };

@@ -4,6 +4,10 @@
 #include"clsString.h"
 #include"clsInputValidate.h"
 #include"clsCurrenciesListScreen.h"
+#include"clsFindCurrency.h"
+#include"clsUpdateCurrencyRate.h"
+#include"clsCurrencyCalculator.h"
+
 
 class clsCurrencyExchangeScreen:protected clsScreen
 {
@@ -15,7 +19,7 @@ class clsCurrencyExchangeScreen:protected clsScreen
 	static short _ReadMainMenuOption(short From,short To, string Message)
 	{
 		cout << setw(40) << left << "";
-		short Choice = clsInputValidate::ReadShortNumberBetween(1, 6);
+		short Choice = clsInputValidate::ReadShortNumberBetween(1, 5);
 		return Choice;
 	}
 
@@ -27,17 +31,20 @@ class clsCurrencyExchangeScreen:protected clsScreen
 
 	static void _ShowFindCurrencyScreen()
 	{
-		cout << "\nShowFindCurrencyScreen.\n";
+	//	cout << "\nShowFindCurrencyScreen.\n";
+		clsFindCurrency::ShowFindCurrencyScreen();
 	}
 
 	static void _ShowUpdateRateScreen()
 	{
-		cout << "\nShowUpdateRateScreen.\n";
+		//cout << "\nShowUpdateRateScreen.\n";
+		clsUpdateCurrencyRate::ShowUpdateCurrencyRateScreen();
 	}
 
 	static void _ShowCurrencyCalculatorScreen()
 	{
-		cout << "\n_ShowCurrencyCalculatorScreen.\n";
+	//	cout << "\n_ShowCurrencyCalculatorScreen.\n";
+		clsCurrencyCalculator::ShowCurrencyCalculatorScreen();
 	}
 
 	static void _ShowMainMenueScreen()
@@ -102,6 +109,11 @@ class clsCurrencyExchangeScreen:protected clsScreen
 public:
 	static void ShowCurrencyExchangeScreen()
 	{
+		if (!CheckAccessRights(clsUser::enMainMenuePermissions::pCurrencyExchange))
+		{
+			return;
+		} 
+
 		system("cls");
 		_DrawScreenHeader("\tCurrency Exchange Main Screen.");
 

@@ -19,7 +19,7 @@ public:
 		return clsDate::IsDateBetween(Date, StartDate, EndDate);
 	}
 
-	static short ReadShortNumber(string Message,string ErrorMessage = "Invalid Number, Enter again: ")
+	static short ReadShortNumber(string Message="", string ErrorMessage = "Invalid Number, Enter again: ")
 	{
 		short Number;
 		cout << Message;
@@ -67,6 +67,17 @@ public:
 
 	}
 
+	static short ReadShortNumberInRange(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	{
+		short Number = ReadIntNumber();
+
+		while (!IsNumberBetween(Number, From, To))
+		{
+			cout << ErrorMessage;
+			Number = ReadShortNumber();
+		}
+		return Number;
+	}
 
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{

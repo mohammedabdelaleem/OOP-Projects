@@ -91,7 +91,7 @@ Hong Kong#//#HKD#//#HongKong Dollar#//#7.773000
 Hungary#//#HUF#//#Hungary Forint#//#383.959991
 Iceland#//#ISK#//#Iceland Krona#//#141.669998
 India#//#INR#//#Indian Rupee#//#82.800003
-Indonesia#//#IDR#//#Indonesia Rupiah#//#15655.000000
+Indonesia#//#IDR#//#Indonesia Rupiah#//#15666.000000
 Iran#//#IRR#//#Iranian Rial#//#286676.000000
 Iraq#//#IQD#//#Iraqi Dinar#//#1450.000000
 Ireland#//#EUR#//#Euro#//#0.938000
@@ -99,7 +99,7 @@ Israel#//#ILS#//#Israel Shekel#//#3.389000
 Italy#//#EUR#//#Euro#//#0.938000
 Jamaica#//#JMD#//#Jamaican Dollar#//#153.470001
 Japan#//#JPY#//#Japanese Yen#//#134.869995
-Jordan#//#JOD#//#Jordanian Dinar#//#12.000000
+Jordan#//#JOD#//#Jordanian Dinar#//#0.708000
 Kazakhstan#//#KZT#//#Kazakhstan Tenge#//#468.950012
 Kenya#//#KES#//#Kenyan Shilling#//#122.739998
 Kiribati#//#AUD#//#Australian Dollar#//#1.451000

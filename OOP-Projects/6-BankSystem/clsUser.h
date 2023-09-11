@@ -220,7 +220,7 @@ public:
 
     enum enMainMenuePermissions {
         eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4, pUpdateClients = 8,
-        pFindClient = 16, pTranactions = 32, pManageUsers = 64,pListLoginRegister=128
+        pFindClient = 16, pTranactions = 32, pManageUsers = 64,pListLoginRegister=128,pCurrencyExchange=256
     };
 
     clsUser(enMode Mode=enMode::EmptyMode, string FirstName="", string LastName = "",

@@ -121,6 +121,8 @@ private:
     }
 
 public:
+    enum enFindBy{eCode=1 , eCountry=2 };
+
 
     clsCurrency(enMode Mode=enMode::EmptyMode, string Country="", string CurrencyCode = "", string CurrencyName = "", float Rate=0)
     {
@@ -143,20 +145,20 @@ public:
         return (_Mode == enMode::EmptyMode);
     }
 
+    //Read Only I Don't To Update Them 
     string Country()
     {
         return _Country;
     }
-
     string CurrencyCode()
     {
         return _CurrencyCode;
     }
-
     string CurrencyName()
     {
         return _CurrencyName;
     }
+
 
     void UpdateRate(float NewRate)
     {
@@ -238,6 +240,3 @@ public:
         return _LoadCurrencysDataFromFile();
     }
 };
-
-
-

@@ -16,6 +16,7 @@ class clsCurrenciesListScreen:protected clsScreen
 public:
 	static void ShowCurrenciesListScreen()
 	{
+		
 		vector<clsCurrency>vCurrencies = clsCurrency::GetCurrenciesList();
 
 		string Title = "\t Currencies List Screen.";
@@ -32,8 +33,6 @@ public:
 		{
 			_PrintCurrencyRecord(C);
 		}
-
-
 	}
 };
 

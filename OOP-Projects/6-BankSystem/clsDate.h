@@ -64,7 +64,7 @@ public:
     //OverLoaded Constructor
     clsDate(string sDate)
     {
-        vector<string>vDate = clsString::Spilt(sDate, "/");
+        vector<string>vDate = clsString::Split(sDate, "/");
         _Day = stoi(vDate[0]);
         _Month = stoi(vDate[1]);
         _Year = stoi(vDate[2]);
@@ -1269,7 +1269,7 @@ public:
 
   static clsDate StringToDate(string sDate)
  {
-     vector<string>vDateRecord =clsString::Spilt(sDate, "/");
+     vector<string>vDateRecord =clsString::Split(sDate, "/");
      //assert(vDateRecord.size() == 3);
 
      clsDate Date;

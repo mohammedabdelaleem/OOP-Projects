@@ -37,7 +37,7 @@ public:
 	}
 	
 
-	static short ReadShortNumberBetween(int From, int To)
+	static short ReadShortNumberBetween(int From, int To,string Message="")
 	{
 		
 			short Number = 1;
@@ -50,7 +50,14 @@ public:
 					cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					cout << "Invalid input. Please enter a number between " << From << " and " << To << "." << endl;
 				}
-				cout << "Enter A Number [" << From << "-" << To << "] ? ";
+				if(Message!="")
+				{
+					cout <<Message <<" [" << From << " - " << To << "] ? ";
+				}
+				else
+				{
+					cout << "Enter A Number [" << From << "-" << To << "] ? ";
+				}
 				cin >> Number;
 				validInput = cin.good() && Number >= From && Number <= To;
 			} while (!validInput);

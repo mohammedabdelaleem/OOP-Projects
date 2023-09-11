@@ -30,7 +30,7 @@ private:
 
     static clsUser _ConvertLinetoUserObject(string Line, string Seperator = "#//#")
     {
-        vector<string> vUserData = clsString::Spilt(Line, Seperator);
+        vector<string> vUserData = clsString::Split(Line, Seperator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
             vUserData[3], vUserData[4],clsUtil::DecryptText( vUserData[5]), stoi(vUserData[6]));
@@ -39,7 +39,7 @@ private:
 
     static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
     {
-        vector<string>vRecord = clsString::Spilt(Line, Seperator);
+        vector<string>vRecord = clsString::Split(Line, Seperator);
         stLoginRegisterRecord UserRecord;
         UserRecord.DateTime = vRecord[0];
         UserRecord.UserName = vRecord[1];

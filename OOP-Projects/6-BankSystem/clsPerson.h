@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class clsPerson:clsInterfaceCommunication
+class clsPerson:public  clsInterfaceCommunication
 {
 
 private:
@@ -17,7 +17,7 @@ private:
 
 public:
 
-    clsPerson(string FirstName, string LastName, string Email, string Phone)
+    clsPerson(string FirstName="", string LastName="", string Email = "", string Phone = "")
     {
 
         _FirstName = FirstName;
@@ -98,7 +98,8 @@ public:
 
     void SendEmail(string Title, string Body)
     {
-
+        cout << "Dear: " << Title << endl;
+        cout << Body << endl;
     }
 
     void SendFax(string Title, string Body)

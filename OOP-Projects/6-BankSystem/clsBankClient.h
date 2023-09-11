@@ -27,7 +27,7 @@ private:
 
 	static clsBankClient _ConvertLineToClientObject(string sLine)
 	{
-		vector<string>vClientDate = clsString::Spilt(sLine, "#//#");
+		vector<string>vClientDate = clsString::Split(sLine, "#//#");
 
 		return clsBankClient(enMode::UpdateMode, vClientDate[0], vClientDate[1], vClientDate[2]
 			, vClientDate[3], vClientDate[4], vClientDate[5], stof(vClientDate[6]));
@@ -50,7 +50,7 @@ private:
 
 	static stTransferLogRecord _ConvertLineToTransferLogRecord(string Line)
 	{
-		vector<string>vRecordLine=clsString::Spilt(Line,"#//#");
+		vector<string>vRecordLine=clsString::Split(Line,"#//#");
 
 		stTransferLogRecord Record;
 

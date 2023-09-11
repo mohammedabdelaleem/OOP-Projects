@@ -275,7 +275,7 @@ public:
 	}
 	////////
 
-	static string UpperAllLetterOfTheString(string Str)
+	static string UpperAllString(string Str)
 	{
 		for (short i = 0; i < Str.length(); i++)
 		{
@@ -284,9 +284,9 @@ public:
 		return Str;
 	}
 
-	void  UpperAllLetterOfTheString()
+	void  UpperAllString()
 	{
-		_Value = UpperAllLetterOfTheString(_Value);
+		_Value = UpperAllString(_Value);
 	}
 	//////
 
@@ -580,7 +580,7 @@ public:
 	//////////////////
 
 
-	static vector<string> Spilt(string str, string delim = " ")
+	static vector<string> Split(string str, string delim = " ")
 	{
 		short Pos = 0;
 		string sWord;
@@ -622,7 +622,7 @@ public:
 
 	static string ReverseWords(string Str)
 	{
-		vector<string>vWords = Spilt(Str);
+		vector<string>vWords = Split(Str);
 		ReverseStringVector(vWords);
 		return JoinString(vWords);
 	}
@@ -659,7 +659,7 @@ public:
 	//Math Case =>case sencetive
 	static string ReplaceWordInStringMatchedOrNot(string sBase, string StringToReplace, string ReplaceTo, bool IsMatch = true)
 	{
-		vector<string>vWords = Spilt(sBase, " ");
+		vector<string>vWords = Split(sBase, " ");
 
 		for (string& Str : vWords)
 		{
